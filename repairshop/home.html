@@ -1,0 +1,189 @@
+{% extends 'repairshop/base.html' %}
+{% load static %}
+
+{% block title %}SmartFix | Mobile Repair & Hardware{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100 py-5">
+            <div class="col-lg-6">
+                <span class="eyebrow">Fast Repairs. Genuine Parts. Trusted Care.</span>
+                <h1 class="display-4 fw-bold mb-3">Expert Mobile Repair & Hardware Solutions</h1>
+                <p class="lead text-muted mb-4">From cracked screens to software issues, SmartFix restores your device quickly with professional diagnostics, premium parts, and dependable aftercare.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#services" class="btn btn-primary btn-lg px-4 rounded-pill">Explore Services</a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-4 rounded-pill">Contact Us</a>
+                </div>
+                <div class="hero-stats mt-5">
+                    <div>
+                        <strong>12k+</strong>
+                        <span>Repairs Done</span>
+                    </div>
+                    <div>
+                        <strong>4.9/5</strong>
+                        <span>Customer Rating</span>
+                    </div>
+                    <div>
+                        <strong>48 hrs</strong>
+                        <span>Avg. Turnaround</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="hero-card shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=80" alt="Mobile repair technician" class="img-fluid rounded-4">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="services">
+    <div class="container">
+        <div class="section-heading text-center mb-5">
+            <span class="eyebrow text-primary">Featured Services</span>
+            <h2>Repair solutions built for every device</h2>
+        </div>
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card h-100">
+                    <div class="service-image">
+                        <img src="{% if service.image %}{{ service.image.url }}{% else %}https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80{% endif %}" alt="{{ service.service_name }}" class="img-fluid">
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="service-icon"><i class="bi bi-tools"></i></div>
+                        <h4>{{ service.service_name }}</h4>
+                        <p>{{ service.description|truncatechars:110 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-primary fw-semibold">{{ service.estimated_duration }}</span>
+                            <a href="{% url 'service_detail' service.id %}" class="btn btn-link p-0">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No services available yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section bg-soft">
+    <div class="container">
+        <div class="section-heading text-center mb-5">
+            <span class="eyebrow text-primary">Popular Products</span>
+            <h2>Hardware essentials for everyday use</h2>
+        </div>
+        <div class="row g-4">
+            {% for product in products %}
+            <div class="col-md-6 col-lg-3">
+                <div class="product-card h-100">
+                    <div class="product-image">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=700&q=80{% endif %}" alt="{{ product.product_name }}" class="img-fluid">
+                    </div>
+                    <div class="card-body p-3">
+                        <span class="badge text-bg-light mb-2">{{ product.category }}</span>
+                        <h5>{{ product.product_name }}</h5>
+                        <p>{{ product.description|truncatechars:80 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price">${{ product.price }}</span>
+                            <span class="availability {{ product.availability|slugify }}">{{ product.availability }}</span>
+                        </div>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-primary w-100 mt-3">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No products available yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="section-heading mb-4">
+                    <span class="eyebrow text-primary">Why Choose Us</span>
+                    <h2>Smart service quality you can count on</h2>
+                </div>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+                        <div>
+                            <h5>Certified technicians</h5>
+                            <p>Experienced professionals diagnose and repair phones with precision and care.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="bi bi-arrow-repeat"></i></div>
+                        <div>
+                            <h5>Fast turnaround</h5>
+                            <p>We prioritize quick service windows so you can get back to your routine faster.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="bi bi-bag-check"></i></div>
+                        <div>
+                            <h5>Genuine hardware</h5>
+                            <p>We supply durable accessories and proven replacement parts from trusted vendors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1000&q=80" alt="Professional repair desk" class="img-fluid rounded-4 shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-dark text-white testimonials">
+    <div class="container">
+        <div class="section-heading text-center mb-5">
+            <span class="eyebrow text-light">Testimonials</span>
+            <h2>Customers trust our repair excellence</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="stars mb-3"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                    <p>“SmartFix replaced my screen and the quality looks better than the original. Fast, transparent, and super professional.”</p>
+                    <div class="person">Ariana M.</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="stars mb-3"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                    <p>“Their battery replacement was completed the same day. The team explained every step and the device feels brand new.”</p>
+                    <div class="person">Daniel R.</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="stars mb-3"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                    <p>“We bought a charging cable and case here. Excellent product quality and customer support. Highly recommended!”</p>
+                    <div class="person">Megan T.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section contact-banner">
+    <div class="container">
+        <div class="row align-items-center justify-content-between g-4">
+            <div class="col-lg-7">
+                <h3 class="mb-2">Need help with your device?</h3>
+                <p class="mb-0 text-muted">Speak with our technicians for fast diagnostics and a personalized repair plan.</p>
+            </div>
+            <div class="col-lg-5 text-lg-end">
+                <a href="{% url 'repair_inquiry' %}" class="btn btn-primary btn-lg rounded-pill px-4">Request a Repair</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

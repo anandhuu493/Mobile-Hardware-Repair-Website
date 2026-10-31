@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+            <div class="brand-icon me-2">
+                <i class="bi bi-phone-fill"></i>
+            </div>
+            <span>SmartFix</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link {% if '/about/' in request.path %}active{% endif %}" href="{% url 'about' %}">About</a></li>
+                <li class="nav-item"><a class="nav-link {% if '/services/' in request.path %}active{% endif %}" href="{% url 'services' %}">Services</a></li>
+                <li class="nav-item"><a class="nav-link {% if '/products/' in request.path %}active{% endif %}" href="{% url 'products' %}">Products</a></li>
+                <li class="nav-item"><a class="nav-link {% if '/contact/' in request.path %}active{% endif %}" href="{% url 'contact' %}">Contact</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-primary btn-sm px-3 rounded-pill" href="{% url 'repair_inquiry' %}">Book Repair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

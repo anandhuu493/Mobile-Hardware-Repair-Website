@@ -1,0 +1,40 @@
+{% extends 'repairshop/base.html' %}
+
+{% block title %}{{ product.product_name }} | SmartFix{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content text-center">
+            <span class="eyebrow text-primary">Product Detail</span>
+            <h1>{{ product.product_name }}</h1>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <img src="{% if product.image %}{{ product.image.url }}{% else %}https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=700&q=80{% endif %}" alt="{{ product.product_name }}" class="img-fluid rounded-4 shadow-lg">
+            </div>
+            <div class="col-lg-6">
+                <div class="detail-box">
+                    <span class="badge text-bg-primary-soft mb-3">{{ product.category }}</span>
+                    <h2 class="mb-3">${{ product.price }}</h2>
+                    <div class="mb-3">
+                        <span class="availability {{ product.availability|slugify }}">{{ product.availability }}</span>
+                    </div>
+                    <p class="text-muted">{{ product.description }}</p>
+                    <ul class="detail-list">
+                        <li>Built for reliability and daily use</li>
+                        <li>Compatible with multiple mobile brands</li>
+                        <li>Secure packaging and quick dispatch</li>
+                    </ul>
+                    <a href="{% url 'contact' %}" class="btn btn-primary rounded-pill px-4">Ask About This Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

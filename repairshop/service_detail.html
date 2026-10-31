@@ -1,0 +1,37 @@
+{% extends 'repairshop/base.html' %}
+
+{% block title %}{{ service.service_name }} | SmartFix{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content text-center">
+            <span class="eyebrow text-primary">Service Detail</span>
+            <h1>{{ service.service_name }}</h1>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <img src="{% if service.image %}{{ service.image.url }}{% else %}https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80{% endif %}" alt="{{ service.service_name }}" class="img-fluid rounded-4 shadow-lg">
+            </div>
+            <div class="col-lg-6">
+                <div class="detail-box">
+                    <span class="badge text-bg-primary-soft mb-3">Estimated time: {{ service.estimated_duration }}</span>
+                    <h2 class="mb-3">Service overview</h2>
+                    <p class="text-muted">{{ service.description }}</p>
+                    <ul class="detail-list">
+                        <li>Professional device inspection and diagnostics</li>
+                        <li>Quality replacement parts and careful handling</li>
+                        <li>Expert support for hardware and software concerns</li>
+                    </ul>
+                    <a href="{% url 'repair_inquiry' %}" class="btn btn-primary rounded-pill px-4">Book This Service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

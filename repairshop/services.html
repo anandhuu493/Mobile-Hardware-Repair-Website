@@ -1,0 +1,41 @@
+{% extends 'repairshop/base.html' %}
+
+{% block title %}Repair Services | SmartFix{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content text-center">
+            <span class="eyebrow text-primary">Our Services</span>
+            <h1>Professional mobile care for every issue</h1>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card h-100">
+                    <div class="service-image">
+                        <img src="{% if service.image %}{{ service.image.url }}{% else %}https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80{% endif %}" alt="{{ service.service_name }}" class="img-fluid">
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="service-icon"><i class="bi bi-tools"></i></div>
+                        <h4>{{ service.service_name }}</h4>
+                        <p>{{ service.description }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-semibold">{{ service.estimated_duration }}</span>
+                            <a href="{% url 'service_detail' service.id %}" class="btn btn-primary btn-sm rounded-pill">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No services available yet.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
